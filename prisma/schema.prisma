@@ -1,0 +1,41 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// 選手マスタ
+model Player {
+  id            Int       @id @default(autoincrement())
+  registrationNo String   @unique @map("registration_no")
+  name          String
+  club          String?
+  prefecture    String?
+  createdAt     DateTime  @default(now()) @map("created_at")
+  updatedAt     DateTime  @updatedAt @map("updated_at")
+  
+  rankings      Ranking[]
+  
+  @@map("players")
+}
+
+// ランキング履歴
+model Ranking {
+  id           Int      @id @default(autoincrement())
+  playerId     Int      @map("player_id")
+  category     String   // 'gs45', 'gs50', 'gd45', etc.
+  rankPosition Int      @map("rank_position")
+  totalPoints  Int      @map("total_points")
+  calcPoints   Int      @map("calc_points")
+  rankingDate  DateTime @map("ranking_date")
+  createdAt    DateTime @default(now()) @map("created_at")
+  
+  player       Player   @relation(fields: [playerId], references: [id])
+  
+  @@map("rankings")
+  @@index([category, rankingDate])
+  @@index([playerId])
+}
