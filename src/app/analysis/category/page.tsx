@@ -1,5 +1,8 @@
+// app/analysis/category/page.tsx
 import { prisma } from '@/lib/prisma';
 import CategoryRankingFlow from '@/components/CategoryRankingFlow';
+import CategoryDataStatus from '@/components/CategoryDataStatus';
+import RankingAnalysisSection from '@/components/RankingAnalysisSection';
 import { Suspense } from 'react';
 
 // カテゴリー定義
@@ -37,15 +40,62 @@ interface SearchParams {
   endMonth?: string;
 }
 
+// データ取得関数
+async function getLatestPeriodData() {
+  const latestRanking = await prisma.ranking.findFirst({
+    orderBy: { rankingDate: 'desc' },
+    select: { rankingDate: true }
+  });
+
+  if (!latestRanking) return null;
+
+  const latestDate = new Date(latestRanking.rankingDate);
+  const year = latestDate.getFullYear();
+  const month = latestDate.getMonth() + 1;
+
+  const startDate = new Date(year, month - 1, 1);
+  const endDate = new Date(year, month, 0, 23, 59, 59);
+
+  const categories = await prisma.ranking.groupBy({
+    by: ['gender', 'type', 'ageGroup'],
+    where: {
+      rankingDate: {
+        gte: startDate,
+        lte: endDate,
+      },
+    },
+    _count: {
+      id: true,
+    },
+  });
+
+  const total = categories.reduce((sum, cat) => sum + cat._count.id, 0);
+
+  return {
+    year,
+    month,
+    total,
+    categories: categories.map(cat => ({
+      gender: cat.gender,
+      type: cat.type,
+      ageGroup: cat.ageGroup,
+      count: cat._count.id,
+    })),
+  };
+}
+
 export default async function CategoryAnalysisPage({
   searchParams,
 }: {
-  searchParams: SearchParams;
+  searchParams: Promise<SearchParams>;
 }) {
+  // searchParamsをawaitする
+  const params = await searchParams;
+  
   // デフォルト値の設定
-  const gender = searchParams.gender || 'male';
-  const type = searchParams.type || 'singles';
-  const ageGroup = searchParams.ageGroup || '45';
+  const gender = params.gender || 'male';
+  const type = params.type || 'singles';
+  const ageGroup = params.ageGroup || '45';
 
   // 利用可能な期間を取得
   const periods = await prisma.ranking.findMany({
@@ -71,159 +121,62 @@ export default async function CategoryAnalysisPage({
 
   // デフォルトの期間設定（直近12ヶ月）
   const latestPeriod = availablePeriods[0];
-  const endYear = searchParams.endYear || latestPeriod?.year.toString();
-  const endMonth = searchParams.endMonth || latestPeriod?.month.toString();
+  const endYear = params.endYear || latestPeriod?.year.toString();
+  const endMonth = params.endMonth || latestPeriod?.month.toString();
   
   const defaultStartDate = new Date(parseInt(endYear), parseInt(endMonth) - 1, 1);
   defaultStartDate.setMonth(defaultStartDate.getMonth() - 11); // 12ヶ月前
   
-  const startYear = searchParams.startYear || defaultStartDate.getFullYear().toString();
-  const startMonth = searchParams.startMonth || (defaultStartDate.getMonth() + 1).toString();
+  const startYear = params.startYear || defaultStartDate.getFullYear().toString();
+  const startMonth = params.startMonth || (defaultStartDate.getMonth() + 1).toString();
+
+  // 最新期間のデータを取得
+  const periodData = await getLatestPeriodData();
 
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-8">カテゴリ別ランキング分析</h1>
       
-      <div className="bg-white rounded-lg shadow-md p-6 mb-8">
-        <h2 className="text-xl font-semibold mb-4">分析条件</h2>
-        
-        <form method="get" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {/* カテゴリ選択 */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              性別
-            </label>
-            <select
-              name="gender"
-              defaultValue={gender}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-              {Object.entries(CATEGORIES.gender).map(([value, label]) => (
-                <option key={value} value={value}>
-                  {label}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              種目
-            </label>
-            <select
-              name="type"
-              defaultValue={type}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-              {Object.entries(CATEGORIES.type).map(([value, label]) => (
-                <option key={value} value={value}>
-                  {label}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              年齢カテゴリ
-            </label>
-            <select
-              name="ageGroup"
-              defaultValue={ageGroup}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-              {Object.entries(CATEGORIES.ageGroup).map(([value, label]) => (
-                <option key={value} value={value}>
-                  {label}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          {/* 期間選択 */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              開始年月
-            </label>
-            <div className="flex gap-2">
-              <input
-                type="number"
-                name="startYear"
-                defaultValue={startYear}
-                min="2004"
-                max={new Date().getFullYear()}
-                className="w-1/2 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-              <input
-                type="number"
-                name="startMonth"
-                defaultValue={startMonth}
-                min="1"
-                max="12"
-                className="w-1/2 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              終了年月
-            </label>
-            <div className="flex gap-2">
-              <input
-                type="number"
-                name="endYear"
-                defaultValue={endYear}
-                min="2004"
-                max={new Date().getFullYear()}
-                className="w-1/2 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-              <input
-                type="number"
-                name="endMonth"
-                defaultValue={endMonth}
-                min="1"
-                max="12"
-                className="w-1/2 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
-          </div>
-
-          <div className="flex items-end">
-            <button
-              type="submit"
-              className="w-full px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-              分析実行
-            </button>
-          </div>
-        </form>
+      {/* データ取得状況 */}
+      <div className="mb-8">
+        <CategoryDataStatus periodData={periodData} />
       </div>
-
-      {/* ランキング推移表示 */}
-      <Suspense
-        fallback={
-          <div className="flex justify-center items-center h-64">
-            <div className="text-lg">データを読み込み中...</div>
-          </div>
-        }
+      
+      {/* ランキング推移分析セクション */}
+      <RankingAnalysisSection
+        gender={gender}
+        type={type}
+        ageGroup={ageGroup}
+        startYear={startYear}
+        startMonth={startMonth}
+        endYear={endYear}
+        endMonth={endMonth}
+        CATEGORIES={CATEGORIES}
       >
-        <CategoryRankingFlowWrapper
-          gender={gender}
-          type={type}
-          ageGroup={parseInt(ageGroup)}
-          startYear={parseInt(startYear)}
-          startMonth={parseInt(startMonth)}
-          endYear={parseInt(endYear)}
-          endMonth={parseInt(endMonth)}
-        />
-      </Suspense>
+        <Suspense
+          fallback={
+            <div className="flex justify-center items-center h-64">
+              <div className="text-lg">データを読み込み中...</div>
+            </div>
+          }
+        >
+          <CategoryRankingFlowWrapper
+            gender={gender}
+            type={type}
+            ageGroup={parseInt(ageGroup)}
+            startYear={parseInt(startYear)}
+            startMonth={parseInt(startMonth)}
+            endYear={parseInt(endYear)}
+            endMonth={parseInt(endMonth)}
+          />
+        </Suspense>
+      </RankingAnalysisSection>
     </div>
   );
 }
 
-// データフェッチを分離したラッパーコンポーネント
-async function CategoryRankingFlowWrapper({
+// データフェッチを分離したラッパーコンポーネント（RankingAnalysisSectionから呼び出される）
+export async function CategoryRankingFlowWrapper({
   gender,
   type,
   ageGroup,

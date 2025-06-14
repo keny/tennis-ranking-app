@@ -216,7 +216,8 @@ export default function ScrapingAdminPage() {
           const formData = new FormData(e.currentTarget);
           const year = formData.get('year') as string;
           const month = formData.get('month') as string;
-          const category = formData.get('category') as string;
+          const gender = formData.get('gender') as string;
+          const type = formData.get('type') as string;
           const ageGroup = formData.get('ageGroup') as string;
           
           if (!year || !month) {
@@ -233,16 +234,18 @@ export default function ScrapingAdminPage() {
               month: parseInt(month),
             };
             
-            // カテゴリが指定されている場合は性別と種目を設定
-            if (category && category !== 'all') {
-              const [gender, type] = category.split('-');
-              body.gender = gender;
-              body.type = type;
-            }
-            
-            // 年齢が指定されている場合
-            if (ageGroup && ageGroup !== 'all') {
-              body.ageGroup = parseInt(ageGroup);
+            // 性別、種目、年齢がすべて指定されている場合はカテゴリコードを構築
+            if (gender !== 'all' && type !== 'all' && ageGroup !== 'all') {
+              // カテゴリコードを構築 (例: gs45, ld70)
+              // JTAのカテゴリコード: g=男子(gentlemen), l=女子(ladies)
+              const genderCode = gender === 'male' ? 'g' : 'l';
+              const typeCode = type === 'singles' ? 's' : 'd';
+              body.categoryCode = `${genderCode}${typeCode}${ageGroup}`;
+            } else if (gender !== 'all' || type !== 'all' || ageGroup !== 'all') {
+              // 部分的な指定がある場合は個別にパラメータを送信
+              if (gender !== 'all') body.gender = gender;
+              if (type !== 'all') body.type = type;
+              if (ageGroup !== 'all') body.ageGroup = parseInt(ageGroup);
             }
             
             const response = await fetch('/api/admin/scraping/archive', {
@@ -254,7 +257,30 @@ export default function ScrapingAdminPage() {
             });
             
             const data = await response.json();
-            setResult(data);
+            
+            // レスポンスの詳細を整形
+            if (data.success) {
+              const detailMessage = data.details 
+                ? `全${data.details.totalCategories}カテゴリ中${data.details.successfulCategories}カテゴリ成功、合計${data.details.totalRecords}件`
+                : data.category 
+                  ? `カテゴリ ${data.category}: ${data.totalRecords || 0}件`
+                  : '';
+              
+              setResult({
+                success: true,
+                message: data.message || 'アーカイブ取得が完了しました',
+                details: {
+                  newRankings: data.totalRecords || data.details?.totalRecords || 0,
+                  updatedPlayers: 0,
+                  errors: 0
+                }
+              });
+            } else {
+              setResult({
+                success: false,
+                message: data.message || data.error || 'アーカイブ取得に失敗しました'
+              });
+            }
             
             if (data.success) {
               await fetchStats();
@@ -303,36 +329,49 @@ export default function ScrapingAdminPage() {
             
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
-                カテゴリ（オプション）
+                性別
               </label>
               <select
-                name="category"
+                name="gender"
                 className="w-full px-3 py-2 border border-gray-300 rounded-md"
                 defaultValue="all"
               >
                 <option value="all">全て</option>
-                <option value="male-singles">男S</option>
-                <option value="male-doubles">男D</option>
-                <option value="female-singles">女S</option>
-                <option value="female-doubles">女D</option>
+                <option value="male">男子</option>
+                <option value="female">女子</option>
               </select>
             </div>
             
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
-                年齢（オプション）
+                種目
               </label>
               <select
-                name="ageGroup"
+                name="type"
                 className="w-full px-3 py-2 border border-gray-300 rounded-md"
                 defaultValue="all"
               >
                 <option value="all">全て</option>
-                {[35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85].map(age => (
-                  <option key={age} value={age}>{age}歳以上</option>
-                ))}
+                <option value="singles">シングルス</option>
+                <option value="doubles">ダブルス</option>
               </select>
             </div>
+          </div>
+          
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              年齢カテゴリ
+            </label>
+            <select
+              name="ageGroup"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md"
+              defaultValue="all"
+            >
+              <option value="all">全て</option>
+              {[35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85].map(age => (
+                <option key={age} value={age}>{age}歳以上</option>
+              ))}
+            </select>
           </div>
           
           <div className="flex gap-4">
@@ -348,27 +387,30 @@ export default function ScrapingAdminPage() {
               type="button"
               onClick={(e) => {
                 const form = e.currentTarget.closest('form') as HTMLFormElement;
-                const categorySelect = form.querySelector('select[name="category"]') as HTMLSelectElement;
+                const genderSelect = form.querySelector('select[name="gender"]') as HTMLSelectElement;
+                const typeSelect = form.querySelector('select[name="type"]') as HTMLSelectElement;
                 const ageGroupSelect = form.querySelector('select[name="ageGroup"]') as HTMLSelectElement;
                 
-                categorySelect.value = 'all';
+                genderSelect.value = 'all';
+                typeSelect.value = 'all';
                 ageGroupSelect.value = 'all';
               }}
               className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
             >
-              カテゴリをリセット
+              フィルターをリセット
             </button>
           </div>
           
           <div className="text-sm text-gray-600">
-            <p>※ カテゴリを指定しない場合は、選択した年月の全カテゴリを取得します</p>
-            <p>※ 特定のカテゴリのみ再取得したい場合に使用してください</p>
+            <p>※ 全てのフィルターを選択しない場合は、選択した年月の全カテゴリを取得します</p>
+            <p>※ 特定のカテゴリのみ再取得したい場合は、性別・種目・年齢をすべて指定してください</p>
+            <p>※ 例：男子シングルス45歳以上 → 性別:男子、種目:シングルス、年齢:45歳以上</p>
           </div>
         </form>
       </div>
 
       {/* バッチスクレイピング */}
-      <BatchScrapingPanel onComplete={fetchStats} />
+      <BatchScrapingPanel />
 
       {/* 期間別データ */}
       <div className="bg-white rounded-lg shadow p-6">
