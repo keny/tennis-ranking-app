@@ -1,460 +1,242 @@
-// app/admin/scraping/page.tsx
-'use client'
+'use client';
 
-import { useState, useEffect } from 'react'
-import { CategoryCode } from '@/lib/scraping/archive-utils'
-import BatchScrapingPanel from '@/components/BatchScrapingPanel'
+import { useState, useEffect, useCallback } from 'react';
+import BatchScrapingPanel from '@/components/BatchScrapingPanel';
 
-interface ScrapingStats {
-  totalPlayers: number
-  totalRankings: number
-  totalScrapingLogs: number
-  successfulScrapings: number
-  failedScrapings: number
-  successRate: string
-  processedPeriods: number
-  totalPeriods: number
-  completionRate: string
-  lastScrapingDate: string | null
+interface Stats {
+  totalPlayers: number;
+  totalRankings: number;
+  lastScrapingDate: string | null;
+  periodCounts?: {
+    year: number;
+    month: number;
+    count: number;
+  }[];
 }
 
-interface Category {
-  code: string
-  gender: string
-  type: string
-  ageGroup: number
-  displayName: string
-}
-
-interface Period {
-  year: number
-  month: number
-  displayName: string
-  isProcessed: boolean
-  processedCategories: number
-  totalCategories: number
-  completionRate: number
+interface ScrapingResult {
+  success: boolean;
+  message: string;
+  details?: {
+    newRankings: number;
+    updatedPlayers: number;
+    errors: number;
+  };
 }
 
 export default function ScrapingAdminPage() {
-  const [stats, setStats] = useState<ScrapingStats | null>(null)
-  const [categories, setCategories] = useState<Category[]>([])
-  const [periods, setPeriods] = useState<Period[]>([])
-  const [selectedCategory, setSelectedCategory] = useState<string>('')
-  const [selectedYear, setSelectedYear] = useState<number>(new Date().getFullYear())
-  const [selectedMonth, setSelectedMonth] = useState<number>(new Date().getMonth() + 1)
-  const [isLoading, setIsLoading] = useState(false)
-  const [message, setMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null)
+  const [stats, setStats] = useState<Stats | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [scraping, setScraping] = useState(false);
+  const [result, setResult] = useState<ScrapingResult | null>(null);
+  const [autoRefresh, setAutoRefresh] = useState(true);
+
+  const fetchStats = useCallback(async () => {
+    try {
+      const response = await fetch('/api/admin/scraping/stats');
+      if (!response.ok) {
+        console.warn('Stats fetch failed:', response.status);
+        return;
+      }
+      const data = await response.json();
+      setStats(data);
+    } catch (error) {
+      console.warn('Stats fetch error:', error);
+      // エラーを無視して続行
+    } finally {
+      setLoading(false);
+    }
+  }, []);
 
   useEffect(() => {
-    fetchStats()
-    fetchCategories()
-    fetchPeriods()
-    
-    // 定期的に統計情報を更新（10秒ごと）
-    const interval = setInterval(() => {
-      fetchStats()
-      fetchPeriods()
-    }, 10000)
-    
-    return () => clearInterval(interval)
-  }, [])
+    // 初回読み込み
+    fetchStats();
 
-  const fetchStats = async () => {
-    try {
-      const res = await fetch('/api/admin/scraping/stats')
-      const data = await res.json()
-      setStats(data)
-    } catch (error) {
-      console.error('Failed to fetch stats:', error)
-    }
-  }
+    // 自動更新の設定
+    let interval: NodeJS.Timeout | null = null;
 
-  const fetchCategories = async () => {
-    try {
-      const res = await fetch('/api/admin/scraping/categories')
-      const data = await res.json()
-      setCategories(data.categories)
-    } catch (error) {
-      console.error('Failed to fetch categories:', error)
-    }
-  }
+    const setupInterval = () => {
+      if (autoRefresh && document.visibilityState === 'visible') {
+        interval = setInterval(fetchStats, 10000);
+      }
+    };
 
-  const fetchPeriods = async () => {
-    try {
-      const res = await fetch('/api/admin/scraping/periods')
-      const data = await res.json()
-      setPeriods(data.periods)
-    } catch (error) {
-      console.error('Failed to fetch periods:', error)
-    }
-  }
+    const handleVisibilityChange = () => {
+      if (interval) {
+        clearInterval(interval);
+        interval = null;
+      }
+      if (document.visibilityState === 'visible' && autoRefresh) {
+        fetchStats(); // ページがアクティブになったら即座に更新
+        setupInterval();
+      }
+    };
 
-  const scrapeLatest = async (all: boolean = false) => {
-    setIsLoading(true)
-    setMessage(null)
+    // 初期設定
+    setupInterval();
+
+    // ページの表示/非表示を監視
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    return () => {
+      if (interval) clearInterval(interval);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+    };
+  }, [fetchStats, autoRefresh]);
+
+  const handleScrapingLatest = async () => {
+    setScraping(true);
+    setResult(null);
     
     try {
-      const res = await fetch('/api/admin/scraping/latest', {
+      const response = await fetch('/api/admin/scraping/latest', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          categoryCode: all ? null : selectedCategory,
-          all
-        })
-      })
+      });
       
-      const data = await res.json()
+      const data = await response.json();
+      setResult(data);
       
       if (data.success) {
-        setMessage({ type: 'success', text: '最新ランキングの取得に成功しました' })
-        // 統計情報と期間情報を更新
-        await fetchStats()
-        await fetchPeriods()
-      } else {
-        setMessage({ type: 'error', text: data.error || '取得に失敗しました' })
+        await fetchStats();
       }
     } catch (error) {
-      setMessage({ type: 'error', text: 'エラーが発生しました' })
+      setResult({
+        success: false,
+        message: 'スクレイピング中にエラーが発生しました',
+      });
     } finally {
-      setIsLoading(false)
+      setScraping(false);
     }
-  }
+  };
 
-  const scrapeArchive = async (all: boolean = false) => {
-    setIsLoading(true)
-    setMessage(null)
-    
-    try {
-      const res = await fetch('/api/admin/scraping/archive', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          year: selectedYear,
-          month: selectedMonth,
-          categoryCode: all ? null : selectedCategory
-        })
-      })
-      
-      const data = await res.json()
-      
-      if (data.success) {
-        setMessage({ type: 'success', text: 'アーカイブの取得に成功しました' })
-        // 統計情報と期間情報を更新
-        await fetchStats()
-        await fetchPeriods()
-      } else {
-        setMessage({ type: 'error', text: data.error || '取得に失敗しました' })
-      }
-    } catch (error) {
-      setMessage({ type: 'error', text: 'エラーが発生しました' })
-    } finally {
-      setIsLoading(false)
-    }
-  }
-
-  const scrapeAllArchives = async () => {
-    const startYear = parseInt(prompt('開始年を入力してください（例: 2004）', '2004') || '2004')
-    const skipExisting = confirm('既存データをスキップしますか？（推奨）')
-    
-    if (!confirm(`${startYear}年から現在までの全アーカイブを取得します。長時間かかります。実行しますか？`)) {
-      return
-    }
-    
-    setIsLoading(true)
-    setMessage(null)
-    
-    try {
-      const res = await fetch('/api/admin/scraping/archive/all', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          startYear,
-          startMonth: 1,
-          batchSize: 100,
-          skipExisting
-        })
-      })
-      
-      const data = await res.json()
-      
-      if (data.success) {
-        setMessage({ 
-          type: 'success', 
-          text: `バックグラウンドで処理を開始しました（${startYear}年〜現在）` 
-        })
-      } else {
-        setMessage({ type: 'error', text: data.error || '開始に失敗しました' })
-      }
-    } catch (error) {
-      setMessage({ type: 'error', text: 'エラーが発生しました' })
-    } finally {
-      setIsLoading(false)
-    }
-  }
-
-  const scrapeArchivesByDecade = async (startYear: number, endYear: number) => {
-    const skipExisting = confirm('既存データをスキップしますか？（推奨）')
-    
-    if (!confirm(`${startYear}年から${endYear}年のアーカイブを取得します。実行しますか？`)) {
-      return
-    }
-    
-    setIsLoading(true)
-    setMessage(null)
-    
-    try {
-      const res = await fetch('/api/admin/scraping/archive/all', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          startYear,
-          startMonth: 1,
-          endYear,
-          endMonth: 12,
-          batchSize: 100,
-          skipExisting
-        })
-      })
-      
-      const data = await res.json()
-      
-      if (data.success) {
-        setMessage({ 
-          type: 'success', 
-          text: `バックグラウンドで処理を開始しました（${startYear}年〜${endYear}年）` 
-        })
-        // 統計情報を更新
-        setTimeout(() => {
-          fetchStats()
-          fetchPeriods()
-        }, 3000)
-      } else {
-        setMessage({ type: 'error', text: data.error || '開始に失敗しました' })
-      }
-    } catch (error) {
-      setMessage({ type: 'error', text: 'エラーが発生しました' })
-    } finally {
-      setIsLoading(false)
-    }
+  if (loading) {
+    return (
+      <div className="container mx-auto px-4 py-8">
+        <div className="text-center">読み込み中...</div>
+      </div>
+    );
   }
 
   return (
-    <div className="container mx-auto p-4 max-w-6xl">
-      <h1 className="text-3xl font-bold mb-8">スクレイピング管理</h1>
+    <div className="container mx-auto px-4 py-8">
+      <div className="mb-8">
+        <h1 className="text-3xl font-bold mb-2">スクレイピング管理</h1>
+        <p className="text-gray-600">JTAランキングデータの取得と管理</p>
+      </div>
 
       {/* 統計情報 */}
-      {stats && (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-          <div className="bg-white p-6 rounded-lg shadow">
-            <h3 className="text-lg font-semibold mb-2">選手数</h3>
-            <p className="text-3xl font-bold text-blue-600">{stats.totalPlayers.toLocaleString()}</p>
-          </div>
-          <div className="bg-white p-6 rounded-lg shadow">
-            <h3 className="text-lg font-semibold mb-2">ランキング記録数</h3>
-            <p className="text-3xl font-bold text-green-600">{stats.totalRankings.toLocaleString()}</p>
-          </div>
-          <div className="bg-white p-6 rounded-lg shadow">
-            <h3 className="text-lg font-semibold mb-2">処理完了率</h3>
-            <p className="text-3xl font-bold text-purple-600">{stats.completionRate}</p>
-            <p className="text-sm text-gray-600">{stats.processedPeriods}/{stats.totalPeriods} 期間</p>
-          </div>
-        </div>
-      )}
-
-      {/* メッセージ表示 */}
-      {message && (
-        <div className={`mb-4 p-4 rounded ${
-          message.type === 'success' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
-        }`}>
-          {message.text}
-        </div>
-      )}
-
-      {/* 最新ランキング取得 */}
-      <div className="bg-white p-6 rounded-lg shadow mb-6">
-        <h2 className="text-xl font-semibold mb-4">最新ランキング取得</h2>
-        <div className="flex gap-4 items-end">
-          <div className="flex-1">
-            <label className="block text-sm font-medium mb-2">カテゴリ</label>
-            <select
-              value={selectedCategory}
-              onChange={(e) => setSelectedCategory(e.target.value)}
-              className="w-full px-3 py-2 border rounded-lg"
-              disabled={isLoading}
-            >
-              <option value="">カテゴリを選択</option>
-              {categories.map(cat => (
-                <option key={cat.code} value={cat.code}>
-                  {cat.displayName}
-                </option>
-              ))}
-            </select>
-          </div>
-          <button
-            onClick={() => scrapeLatest(false)}
-            disabled={isLoading || !selectedCategory}
-            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50"
-          >
-            取得
-          </button>
-          <button
-            onClick={() => scrapeLatest(true)}
-            disabled={isLoading}
-            className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 disabled:opacity-50"
-          >
-            全カテゴリ取得
-          </button>
-        </div>
-      </div>
-
-      {/* バッチスクレイピングパネル */}
-      <div className="mb-6">
-        <BatchScrapingPanel />
-      </div>
-
-      {/* アーカイブ取得 */}
-      <div className="bg-white p-6 rounded-lg shadow mb-6">
-        <h2 className="text-xl font-semibold mb-4">アーカイブ取得</h2>
-        <div className="flex gap-4 items-end">
-          <div>
-            <label className="block text-sm font-medium mb-2">年</label>
-            <select
-              value={selectedYear}
-              onChange={(e) => setSelectedYear(Number(e.target.value))}
-              className="px-3 py-2 border rounded-lg"
-              disabled={isLoading}
-            >
-              {Array.from({ length: new Date().getFullYear() - 2003 }, (_, i) => 2004 + i).map(year => (
-                <option key={year} value={year}>{year}年</option>
-              ))}
-            </select>
-          </div>
-          <div>
-            <label className="block text-sm font-medium mb-2">月</label>
-            <select
-              value={selectedMonth}
-              onChange={(e) => setSelectedMonth(Number(e.target.value))}
-              className="px-3 py-2 border rounded-lg"
-              disabled={isLoading}
-            >
-              {Array.from({ length: 12 }, (_, i) => i + 1).map(month => (
-                <option key={month} value={month}>{month}月</option>
-              ))}
-            </select>
-          </div>
-          <div className="flex-1">
-            <label className="block text-sm font-medium mb-2">カテゴリ</label>
-            <select
-              value={selectedCategory}
-              onChange={(e) => setSelectedCategory(e.target.value)}
-              className="w-full px-3 py-2 border rounded-lg"
-              disabled={isLoading}
-            >
-              <option value="">全カテゴリ</option>
-              {categories.map(cat => (
-                <option key={cat.code} value={cat.code}>
-                  {cat.displayName}
-                </option>
-              ))}
-            </select>
-          </div>
-          <button
-            onClick={() => scrapeArchive(selectedCategory === '')}
-            disabled={isLoading}
-            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50"
-          >
-            取得
-          </button>
-        </div>
-        <div className="mt-4 flex gap-2">
-          <button
-            onClick={scrapeAllArchives}
-            disabled={isLoading}
-            className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 disabled:opacity-50"
-          >
-            全アーカイブ一括取得
-          </button>
-          <span className="text-sm text-gray-600 ml-2">
-            （2004年以降の全データ）
-          </span>
-          <button
-            onClick={() => {
-              fetchStats()
-              fetchPeriods()
-            }}
-            disabled={isLoading}
-            className="ml-auto px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 disabled:opacity-50"
-          >
-            更新
-          </button>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div className="bg-white rounded-lg shadow p-6">
+          <h2 className="text-lg font-semibold text-gray-700 mb-2">総選手数</h2>
+          <p className="text-3xl font-bold text-blue-600">
+            {stats?.totalPlayers.toLocaleString() || 0}
+          </p>
         </div>
         
-        {/* 年代別一括取得ボタン */}
-        <div className="mt-4 space-y-2">
-          <p className="text-sm font-medium text-gray-700">年代別一括取得：</p>
-          <div className="flex flex-wrap gap-2">
-            <button
-              onClick={() => scrapeArchivesByDecade(2004, 2009)}
-              disabled={isLoading}
-              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50"
-            >
-              2004-2009年
-            </button>
-            <button
-              onClick={() => scrapeArchivesByDecade(2010, 2019)}
-              disabled={isLoading}
-              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50"
-            >
-              2010-2019年
-            </button>
-            <button
-              onClick={() => scrapeArchivesByDecade(2020, new Date().getFullYear())}
-              disabled={isLoading}
-              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50"
-            >
-              2020年-現在
-            </button>
-          </div>
+        <div className="bg-white rounded-lg shadow p-6">
+          <h2 className="text-lg font-semibold text-gray-700 mb-2">総ランキング数</h2>
+          <p className="text-3xl font-bold text-green-600">
+            {stats?.totalRankings.toLocaleString() || 0}
+          </p>
+        </div>
+        
+        <div className="bg-white rounded-lg shadow p-6">
+          <h2 className="text-lg font-semibold text-gray-700 mb-2">最終更新</h2>
+          <p className="text-lg font-medium text-gray-900">
+            {stats?.lastScrapingDate 
+              ? new Date(stats.lastScrapingDate).toLocaleString('ja-JP')
+              : '未取得'}
+          </p>
         </div>
       </div>
 
-      {/* 期間別処理状況 */}
-      <div className="bg-white p-6 rounded-lg shadow">
-        <h2 className="text-xl font-semibold mb-4">期間別処理状況</h2>
+      {/* 自動更新の切り替え */}
+      <div className="mb-6">
+        <label className="flex items-center space-x-2">
+          <input
+            type="checkbox"
+            checked={autoRefresh}
+            onChange={(e) => setAutoRefresh(e.target.checked)}
+            className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+          />
+          <span className="text-sm text-gray-700">
+            10秒ごとに自動更新（ページがアクティブな時のみ）
+          </span>
+        </label>
+      </div>
+
+      {/* 最新データ取得 */}
+      <div className="bg-white rounded-lg shadow p-6 mb-8">
+        <h2 className="text-xl font-semibold mb-4">最新ランキング取得</h2>
+        <p className="text-gray-600 mb-4">
+          JTAサイトから最新のランキングデータを取得します
+        </p>
+        
+        <button
+          onClick={handleScrapingLatest}
+          disabled={scraping}
+          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
+        >
+          {scraping ? '取得中...' : '最新データを取得'}
+        </button>
+        
+        {result && (
+          <div className={`mt-4 p-4 rounded ${
+            result.success ? 'bg-green-50 text-green-800' : 'bg-red-50 text-red-800'
+          }`}>
+            <p className="font-medium">{result.message}</p>
+            {result.details && (
+              <div className="mt-2 text-sm">
+                <p>新規ランキング: {result.details.newRankings}</p>
+                <p>更新選手数: {result.details.updatedPlayers}</p>
+                {result.details.errors > 0 && (
+                  <p>エラー: {result.details.errors}</p>
+                )}
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+
+      {/* バッチスクレイピング */}
+      <BatchScrapingPanel onComplete={fetchStats} />
+
+      {/* 期間別データ */}
+      <div className="bg-white rounded-lg shadow p-6">
+        <h2 className="text-xl font-semibold mb-4">期間別データ数</h2>
         <div className="max-h-96 overflow-y-auto">
-          <table className="w-full">
-            <thead className="sticky top-0 bg-gray-50">
+          <table className="min-w-full divide-y divide-gray-200">
+            <thead className="bg-gray-50 sticky top-0">
               <tr>
-                <th className="px-4 py-2 text-left">期間</th>
-                <th className="px-4 py-2 text-center">状態</th>
-                <th className="px-4 py-2 text-center">進捗</th>
-                <th className="px-4 py-2 text-right">完了率</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  年月
+                </th>
+                <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  データ数
+                </th>
               </tr>
             </thead>
-            <tbody>
-              {periods.map(period => (
-                <tr key={`${period.year}-${period.month}`} className="border-t">
-                  <td className="px-4 py-2">{period.displayName}</td>
-                  <td className="px-4 py-2 text-center">
-                    {period.isProcessed ? (
-                      <span className="px-2 py-1 bg-green-100 text-green-800 rounded text-sm">完了</span>
-                    ) : period.processedCategories > 0 ? (
-                      <span className="px-2 py-1 bg-yellow-100 text-yellow-800 rounded text-sm">処理中</span>
-                    ) : (
-                      <span className="px-2 py-1 bg-gray-100 text-gray-800 rounded text-sm">未処理</span>
-                    )}
+            <tbody className="bg-white divide-y divide-gray-200">
+              {stats?.periodCounts?.map((period) => (
+                <tr key={`${period.year}-${period.month}`}>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                    {period.year}年{period.month}月
                   </td>
-                  <td className="px-4 py-2 text-center">
-                    {period.processedCategories}/{period.totalCategories}
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-right">
+                    {period.count.toLocaleString()}
                   </td>
-                  <td className="px-4 py-2 text-right">{period.completionRate}%</td>
                 </tr>
-              ))}
+              )) || (
+                <tr>
+                  <td colSpan={2} className="px-6 py-4 text-center text-sm text-gray-500">
+                    データがありません
+                  </td>
+                </tr>
+              )}
             </tbody>
           </table>
         </div>
       </div>
     </div>
-  )
+  );
 }
