@@ -36,6 +36,12 @@ export default function RootLayout({
                     ランキング一覧
                   </Link>
                   <Link
+                    href="/analysis/category"
+                    className="hover:text-blue-200 transition-colors"
+                  >
+                    カテゴリ分析
+                  </Link>
+                  <Link
                     href="/admin/scraping"
                     className="hover:text-blue-200 transition-colors"
                   >
