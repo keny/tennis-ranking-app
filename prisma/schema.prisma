@@ -7,35 +7,109 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// 選手マスタ
+// 選手マスタ（拡張版）
 model Player {
   id            Int       @id @default(autoincrement())
   registrationNo String   @unique @map("registration_no")
   name          String
   club          String?
   prefecture    String?
+  birthDate     DateTime? @map("birth_date")
+  estimatedBirthYear Int? @map("estimated_birth_year")
   createdAt     DateTime  @default(now()) @map("created_at")
   updatedAt     DateTime  @updatedAt @map("updated_at")
   
   rankings      Ranking[]
+  categoryHistory PlayerCategoryHistory[]
   
   @@map("players")
 }
 
-// ランキング履歴
+// ランキング履歴（時系列対応強化）
 model Ranking {
   id           Int      @id @default(autoincrement())
   playerId     Int      @map("player_id")
-  category     String   // 'gs45', 'gs50', 'gd45', etc.
+  categoryCode String   @map("category_code")
+  gender       String   // 'male' または 'female'
+  type         String   // 'singles' または 'doubles'
+  ageGroup     Int      @map("age_group")
   rankPosition Int      @map("rank_position")
   totalPoints  Int      @map("total_points")
   calcPoints   Int      @map("calc_points")
   rankingDate  DateTime @map("ranking_date")
+  archiveDate  DateTime? @map("archive_date")
+  isLatest     Boolean  @default(false) @map("is_latest")
+  scrapingLogId Int?    @map("scraping_log_id")
   createdAt    DateTime @default(now()) @map("created_at")
-  
+  isTied       Boolean  @default(false) @map("is_tied")  // 追加
   player       Player   @relation(fields: [playerId], references: [id])
+  scrapingLog  ScrapingLog? @relation(fields: [scrapingLogId], references: [id])
   
+  @@unique([playerId, categoryCode, rankingDate])
+  @@index([playerId, rankingDate])
+  @@index([categoryCode, rankingDate])
+  @@index([isLatest])
   @@map("rankings")
-  @@index([category, rankingDate])
-  @@index([playerId])
+}
+
+// アーカイブ期間管理
+model ArchivePeriod {
+  id                  Int      @id @default(autoincrement())
+  year                Int
+  month               Int
+  archiveDate         DateTime @map("archive_date")
+  displayName         String   @map("display_name")
+  isProcessed         Boolean  @default(false) @map("is_processed")
+  totalCategories     Int      @default(0) @map("total_categories")
+  processedCategories Int      @default(0) @map("processed_categories")
+  createdAt           DateTime @default(now()) @map("created_at")
+  
+  scrapingLogs        ScrapingLog[]
+  
+  @@unique([year, month])
+  @@map("archive_periods")
+}
+
+// スクレイピング履歴
+model ScrapingLog {
+  id               Int      @id @default(autoincrement())
+  categoryCode     String   @map("category_code")
+  gender           String
+  type             String
+  ageGroup         Int      @map("age_group")
+  rankingDate      DateTime @map("ranking_date")
+  archivePeriodId  Int?     @map("archive_period_id")
+  totalRecords     Int      @map("total_records")
+  success          Boolean
+  errorMessage     String?  @map("error_message")
+  executionTimeMs  Int?     @map("execution_time_ms")
+  dataSource       String   @map("data_source") // 'latest' または 'archive'
+  createdAt        DateTime @default(now()) @map("created_at")
+  
+  archivePeriod    ArchivePeriod? @relation(fields: [archivePeriodId], references: [id])
+  rankings         Ranking[]
+  
+  @@map("scraping_logs")
+}
+
+// 選手カテゴリ履歴
+model PlayerCategoryHistory {
+  id              Int      @id @default(autoincrement())
+  playerId        Int      @map("player_id")
+  categoryCode    String   @map("category_code")
+  gender          String
+  type            String
+  ageGroup        Int      @map("age_group")
+  firstAppearance DateTime @map("first_appearance")
+  lastAppearance  DateTime @map("last_appearance")
+  totalAppearances Int     @default(1) @map("total_appearances")
+  bestRank        Int?     @map("best_rank")
+  bestPoints      Int?     @map("best_points")
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt @map("updated_at")
+  
+  player          Player   @relation(fields: [playerId], references: [id])
+  
+  @@unique([playerId, categoryCode])
+  @@map("player_category_history")
 }

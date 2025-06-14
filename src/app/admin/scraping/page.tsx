@@ -16,10 +16,6 @@ interface ScrapingStats {
   totalPeriods: number
   completionRate: string
   lastScrapingDate: string | null
-  latestRankingInfo?: {
-    rankingDate: string
-    updateDate: string
-  }
 }
 
 interface Category {
@@ -278,15 +274,6 @@ export default function ScrapingAdminPage() {
       {/* 最新ランキング取得 */}
       <div className="bg-white p-6 rounded-lg shadow mb-6">
         <h2 className="text-xl font-semibold mb-4">最新ランキング取得</h2>
-        <div className="mb-4 p-4 bg-blue-50 rounded-lg">
-          <p className="text-sm text-blue-800">
-            <strong>注意：</strong>
-            JTAサイトに表示されている日付（例：「2025年4月30日付」）でランキングが保存されます。
-          </p>
-          <p className="text-xs text-blue-600 mt-1">
-            ※ 通常、毎月中旬頃に新しいランキングが公開されます
-          </p>
-        </div>
         <div className="flex gap-4 items-end">
           <div className="flex-1">
             <label className="block text-sm font-medium mb-2">カテゴリ</label>

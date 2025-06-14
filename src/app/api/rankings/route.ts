@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { prisma } from '@/lib/prisma'
+import { prisma } from '../../../lib/prisma'
 
 export async function GET() {
   try {
@@ -7,7 +7,7 @@ export async function GET() {
       include: {
         rankings: {
           where: {
-            category: 'gs45',
+            categoryCode: 'gs45',  // ← 'category' から 'categoryCode' に変更
             rankingDate: new Date('2025-04-30')
           },
           orderBy: {
