@@ -10,7 +10,13 @@ interface Stats {
   periodCounts?: {
     year: number;
     month: number;
-    count: number;
+    total: number;
+    categories: Array<{
+      gender: string;
+      type: string;
+      ageGroup: number;
+      count: number;
+    }>;
   }[];
 }
 
@@ -198,43 +204,241 @@ export default function ScrapingAdminPage() {
         )}
       </div>
 
+      {/* アーカイブデータ取得 */}
+      <div className="bg-white rounded-lg shadow p-6 mb-8">
+        <h2 className="text-xl font-semibold mb-4">アーカイブデータ取得</h2>
+        <p className="text-gray-600 mb-4">
+          特定期間のランキングデータを取得します
+        </p>
+        
+        <form onSubmit={async (e) => {
+          e.preventDefault();
+          const formData = new FormData(e.currentTarget);
+          const year = formData.get('year') as string;
+          const month = formData.get('month') as string;
+          const category = formData.get('category') as string;
+          const ageGroup = formData.get('ageGroup') as string;
+          
+          if (!year || !month) {
+            alert('年月を選択してください');
+            return;
+          }
+          
+          setScraping(true);
+          setResult(null);
+          
+          try {
+            const body: any = {
+              year: parseInt(year),
+              month: parseInt(month),
+            };
+            
+            // カテゴリが指定されている場合は性別と種目を設定
+            if (category && category !== 'all') {
+              const [gender, type] = category.split('-');
+              body.gender = gender;
+              body.type = type;
+            }
+            
+            // 年齢が指定されている場合
+            if (ageGroup && ageGroup !== 'all') {
+              body.ageGroup = parseInt(ageGroup);
+            }
+            
+            const response = await fetch('/api/admin/scraping/archive', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(body),
+            });
+            
+            const data = await response.json();
+            setResult(data);
+            
+            if (data.success) {
+              await fetchStats();
+            }
+          } catch (error) {
+            setResult({
+              success: false,
+              message: 'アーカイブ取得中にエラーが発生しました',
+            });
+          } finally {
+            setScraping(false);
+          }
+        }} className="space-y-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                年
+              </label>
+              <select
+                name="year"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                defaultValue=""
+              >
+                <option value="">選択してください</option>
+                {Array.from({ length: new Date().getFullYear() - 2003 }, (_, i) => 2004 + i).reverse().map(year => (
+                  <option key={year} value={year}>{year}年</option>
+                ))}
+              </select>
+            </div>
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                月
+              </label>
+              <select
+                name="month"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                defaultValue=""
+              >
+                <option value="">選択してください</option>
+                {Array.from({ length: 12 }, (_, i) => i + 1).map(month => (
+                  <option key={month} value={month}>{month}月</option>
+                ))}
+              </select>
+            </div>
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                カテゴリ（オプション）
+              </label>
+              <select
+                name="category"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                defaultValue="all"
+              >
+                <option value="all">全て</option>
+                <option value="male-singles">男S</option>
+                <option value="male-doubles">男D</option>
+                <option value="female-singles">女S</option>
+                <option value="female-doubles">女D</option>
+              </select>
+            </div>
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                年齢（オプション）
+              </label>
+              <select
+                name="ageGroup"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                defaultValue="all"
+              >
+                <option value="all">全て</option>
+                {[35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85].map(age => (
+                  <option key={age} value={age}>{age}歳以上</option>
+                ))}
+              </select>
+            </div>
+          </div>
+          
+          <div className="flex gap-4">
+            <button
+              type="submit"
+              disabled={scraping}
+              className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
+            >
+              {scraping ? '取得中...' : 'アーカイブ取得'}
+            </button>
+            
+            <button
+              type="button"
+              onClick={(e) => {
+                const form = e.currentTarget.closest('form') as HTMLFormElement;
+                const categorySelect = form.querySelector('select[name="category"]') as HTMLSelectElement;
+                const ageGroupSelect = form.querySelector('select[name="ageGroup"]') as HTMLSelectElement;
+                
+                categorySelect.value = 'all';
+                ageGroupSelect.value = 'all';
+              }}
+              className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
+            >
+              カテゴリをリセット
+            </button>
+          </div>
+          
+          <div className="text-sm text-gray-600">
+            <p>※ カテゴリを指定しない場合は、選択した年月の全カテゴリを取得します</p>
+            <p>※ 特定のカテゴリのみ再取得したい場合に使用してください</p>
+          </div>
+        </form>
+      </div>
+
       {/* バッチスクレイピング */}
       <BatchScrapingPanel onComplete={fetchStats} />
 
       {/* 期間別データ */}
       <div className="bg-white rounded-lg shadow p-6">
-        <h2 className="text-xl font-semibold mb-4">期間別データ数</h2>
+        <h2 className="text-xl font-semibold mb-4">期間別・カテゴリ別データ数</h2>
         <div className="max-h-96 overflow-y-auto">
-          <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-gray-50 sticky top-0">
-              <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  年月
-                </th>
-                <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  データ数
-                </th>
-              </tr>
-            </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
-              {stats?.periodCounts?.map((period) => (
-                <tr key={`${period.year}-${period.month}`}>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                    {period.year}年{period.month}月
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-right">
-                    {period.count.toLocaleString()}
-                  </td>
-                </tr>
-              )) || (
-                <tr>
-                  <td colSpan={2} className="px-6 py-4 text-center text-sm text-gray-500">
-                    データがありません
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </table>
+          {stats?.periodCounts?.map((period) => (
+            <details key={`${period.year}-${period.month}`} className="mb-4 border-b pb-4">
+              <summary className="cursor-pointer hover:bg-gray-50 p-2 rounded">
+                <span className="font-medium">
+                  {period.year}年{period.month}月
+                </span>
+                <span className="ml-2 text-gray-600">
+                  (合計: {(period.total || period.categories?.reduce((sum, cat) => sum + cat.count, 0) || 0).toLocaleString()}件)
+                </span>
+                {period.categories && period.categories.length < 44 && (
+                  <span className="ml-2 text-yellow-600 text-sm">
+                    ※ {44 - period.categories.length}カテゴリ不足
+                  </span>
+                )}
+              </summary>
+              <div className="mt-2 ml-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm">
+                  {[35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85].map(ageGroup => {
+                    const genderTypeMap = [
+                      { gender: 'male', type: 'singles', label: '男S' },
+                      { gender: 'male', type: 'doubles', label: '男D' },
+                      { gender: 'female', type: 'singles', label: '女S' },
+                      { gender: 'female', type: 'doubles', label: '女D' },
+                    ];
+                    
+                    return (
+                      <div key={ageGroup} className="border rounded p-2">
+                        <div className="font-medium mb-1">{ageGroup}歳以上</div>
+                        <div className="grid grid-cols-4 gap-1">
+                          {genderTypeMap.map(({ gender, type, label }) => {
+                            const category = period.categories.find(
+                              c => c.gender === gender && c.type === type && c.ageGroup === ageGroup
+                            );
+                            return (
+                              <div
+                                key={`${gender}-${type}`}
+                                className={`text-center p-1 rounded ${
+                                  category 
+                                    ? 'bg-green-100 text-green-800' 
+                                    : 'bg-red-100 text-red-800'
+                                }`}
+                              >
+                                <div className="text-xs font-medium">{label}</div>
+                                <div className="text-xs">
+                                  {category ? category.count : '✗'}
+                                </div>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </details>
+          )) || (
+            <div className="text-center text-sm text-gray-500">
+              データがありません
+            </div>
+          )}
+        </div>
+        <div className="mt-4 text-sm text-gray-600">
+          <p>※ 各カテゴリは全44種類（男女 × シングルス/ダブルス × 11年齢区分）</p>
+          <p>※ 緑色：データあり、赤色：データなし</p>
         </div>
       </div>
     </div>
