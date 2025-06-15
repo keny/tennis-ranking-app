@@ -21,6 +21,10 @@ model Player {
   
   rankings      Ranking[]
   categoryHistory PlayerCategoryHistory[]
+
+  matchesAsPlayer1  Match[]            @relation("MatchPlayer1")
+  matchesAsPlayer2  Match[]            @relation("MatchPlayer2")
+  tournamentResults TournamentResult[]
   
   @@map("players")
 }
@@ -112,4 +116,89 @@ model PlayerCategoryHistory {
   
   @@unique([playerId, categoryCode])
   @@map("player_category_history")
+}
+
+// 大会マスタ
+model Tournament {
+  id         Int                   @id @default(autoincrement())
+  name       String
+  year       Int
+  round      Int?                  // 第何回大会
+  venue      String?               // 開催地/会場
+  startDate  DateTime?             @map("start_date")
+  endDate    DateTime?             @map("end_date")
+  createdAt  DateTime              @default(now()) @map("created_at")
+  updatedAt  DateTime              @updatedAt @map("updated_at")
+  
+  categories TournamentCategory[]
+  
+  @@unique([name, year])
+  @@map("tournaments")
+}
+
+// 大会カテゴリー
+model TournamentCategory {
+  id           Int                @id @default(autoincrement())
+  tournamentId Int                @map("tournament_id")
+  categoryCode String             @map("category_code")  // gs35, ld70等
+  gender       String              // 'male' または 'female'
+  type         String              // 'singles' または 'doubles'
+  ageGroup     Int                @map("age_group")
+  drawSize     Int                @map("draw_size")      // 16, 32, 64, 128等
+  createdAt    DateTime           @default(now()) @map("created_at")
+  
+  tournament   Tournament         @relation(fields: [tournamentId], references: [id])
+  matches      Match[]
+  results      TournamentResult[]
+  
+  @@unique([tournamentId, categoryCode])
+  @@index([categoryCode])
+  @@map("tournament_categories")
+}
+
+// 試合結果
+model Match {
+  id             Int                 @id @default(autoincrement())
+  categoryId     Int                 @map("category_id")
+  round          String              // "1R", "2R", "QF", "SF", "F"等
+  matchNumber    Int?                @map("match_number")
+  player1Id      Int?                @map("player1_id")
+  player1Seed    Int?                @map("player1_seed")
+  player1Partner String?             @map("player1_partner")  // ダブルス用
+  player2Id      Int?                @map("player2_id")
+  player2Seed    Int?                @map("player2_seed")
+  player2Partner String?             @map("player2_partner")  // ダブルス用
+  score          String?             // "6-3 6-4", "W.O.", "RET"等
+  winner         String?             // "player1" または "player2"
+  matchDate      DateTime?           @map("match_date")
+  createdAt      DateTime            @default(now()) @map("created_at")
+  
+  category       TournamentCategory  @relation(fields: [categoryId], references: [id])
+  player1        Player?             @relation("MatchPlayer1", fields: [player1Id], references: [id])
+  player2        Player?             @relation("MatchPlayer2", fields: [player2Id], references: [id])
+  
+
+  @@index([categoryId, round])
+  @@index([player1Id])
+  @@index([player2Id])
+  @@map("matches")
+}
+
+// 大会最終成績
+model TournamentResult {
+  id            Int                @id @default(autoincrement())
+  categoryId    Int                @map("category_id")
+  playerId      Int                @map("player_id")
+  partnerName   String?            @map("partner_name")     // ダブルス用
+  finalPosition String             @map("final_position")   // "優勝", "準優勝", "ベスト4"等
+  rankOrder     Int                @map("rank_order")       // 1, 2, 3, 5, 9, 17等
+  pointsEarned  Int?               @map("points_earned")    // 獲得ポイント
+  createdAt     DateTime           @default(now()) @map("created_at")
+  
+  category      TournamentCategory @relation(fields: [categoryId], references: [id])
+  player        Player             @relation(fields: [playerId], references: [id])
+  
+  @@unique([categoryId, playerId, partnerName])
+  @@index([playerId])
+  @@map("tournament_results")
 }

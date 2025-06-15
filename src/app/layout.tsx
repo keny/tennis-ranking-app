@@ -43,7 +43,7 @@ export default function RootLayout({
                     カテゴリ分析
                   </Link>
                   <Link
-                    href="/admin/scraping"
+                    href="/admin"
                     className="hover:text-blue-200 transition-colors"
                   >
                     管理画面
