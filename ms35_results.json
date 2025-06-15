@@ -1,0 +1,111 @@
+{
+  "tournament": "2025年 第11回 関西ハードコートベテランテニス選手権大会",
+  "category": "男子シングルス 35歳以上",
+  "players": [
+    {
+      "draw_no": 1,
+      "registration_no": "G0023470",
+      "seed": "1",
+      "name": "畠中",
+      "club": "聡 関⻄学院庭球倶楽部 畠中 聡",
+      "is_bye": false
+    },
+    {
+      "draw_no": 2,
+      "registration_no": null,
+      "seed": null,
+      "name": null,
+      "club": null,
+      "is_bye": true
+    },
+    {
+      "draw_no": 3,
+      "registration_no": "G0028802",
+      "seed": null,
+      "name": "澤本",
+      "club": "有⼀郎 アズテニス 関 雄輝",
+      "is_bye": false
+    },
+    {
+      "draw_no": 4,
+      "registration_no": "G0026208",
+      "seed": null,
+      "name": "関",
+      "club": "雄輝 COSANA 畠中 聡",
+      "is_bye": false
+    },
+    {
+      "draw_no": 5,
+      "registration_no": "G0026288",
+      "seed": "3〜4",
+      "name": "村上",
+      "club": "⼤喜 PEACE 村上 ⼤喜",
+      "is_bye": false
+    },
+    {
+      "draw_no": 6,
+      "registration_no": null,
+      "seed": null,
+      "name": null,
+      "club": null,
+      "is_bye": true
+    },
+    {
+      "draw_no": 7,
+      "registration_no": null,
+      "seed": null,
+      "name": null,
+      "club": null,
+      "is_bye": true
+    },
+    {
+      "draw_no": 9,
+      "registration_no": "G0027945",
+      "seed": null,
+      "name": "神平",
+      "club": "繁男 ロイヤルヒル'81TC 藤岡 雄⾶",
+      "is_bye": false
+    },
+    {
+      "draw_no": 10,
+      "registration_no": "G0028453",
+      "seed": null,
+      "name": "藤岡",
+      "club": "雄⾶ ⽯⼭TC 岩坂 賢吾",
+      "is_bye": false
+    },
+    {
+      "draw_no": 11,
+      "registration_no": null,
+      "seed": null,
+      "name": null,
+      "club": null,
+      "is_bye": true
+    },
+    {
+      "draw_no": 12,
+      "registration_no": "G0027025",
+      "seed": "3〜4",
+      "name": "岩坂",
+      "club": "賢吾 ⽇本郵政 ⼩林 ⼀成",
+      "is_bye": false
+    },
+    {
+      "draw_no": 14,
+      "registration_no": "G0028469",
+      "seed": null,
+      "name": "松岡",
+      "club": "晃平 上尾セントラルテニスクラブ ⼩林 ⼀成",
+      "is_bye": false
+    },
+    {
+      "draw_no": 15,
+      "registration_no": null,
+      "seed": null,
+      "name": null,
+      "club": null,
+      "is_bye": true
+    }
+  ],
+  "matches": []
+}

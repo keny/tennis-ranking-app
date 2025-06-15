@@ -1,0 +1,79 @@
+{
+  "tournament": "2025年 第11回 関西ハードコートベテランテニス選手権大会",
+  "category": "男子シングルス 35歳以上",
+  "players": [
+    {
+      "draw_no": 1,
+      "registration_no": null,
+      "seed": null,
+      "name": null,
+      "club": null,
+      "is_bye": true
+    },
+    {
+      "draw_no": 5,
+      "registration_no": null,
+      "seed": null,
+      "name": null,
+      "club": null,
+      "is_bye": true
+    },
+    {
+      "draw_no": 7,
+      "registration_no": null,
+      "seed": "8",
+      "name": "奥⽥ ⼤地",
+      "club": "畠中 聡",
+      "is_bye": false
+    },
+    {
+      "draw_no": 8,
+      "registration_no": "G0027134",
+      "seed": null,
+      "name": "岐⾩インターナショナルテニスクラブ",
+      "club": null,
+      "is_bye": false
+    },
+    {
+      "draw_no": 11,
+      "registration_no": null,
+      "seed": "12",
+      "name": "岩坂 賢吾",
+      "club": "⼩林 ⼀成 ⽇本郵政",
+      "is_bye": false
+    },
+    {
+      "draw_no": 12,
+      "registration_no": "G0027025",
+      "seed": "3〜4",
+      "name": "⽇本郵政",
+      "club": null,
+      "is_bye": false
+    },
+    {
+      "draw_no": 13,
+      "registration_no": "G0023430",
+      "seed": "62",
+      "name": "四ノ宮テニスクラブ",
+      "club": null,
+      "is_bye": false
+    },
+    {
+      "draw_no": 14,
+      "registration_no": "G0028469",
+      "seed": "60",
+      "name": "上尾セントラルテニスクラブ",
+      "club": null,
+      "is_bye": false
+    },
+    {
+      "draw_no": 15,
+      "registration_no": null,
+      "seed": "16",
+      "name": "⻄井 ⼤貴",
+      "club": null,
+      "is_bye": false
+    }
+  ],
+  "winner": null
+}

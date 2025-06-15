@@ -1,0 +1,63 @@
+{
+  "tournament": "2025年 第11回 関西ハードコートベテランテニス選手権大会",
+  "category": "男子シングルス 35歳以上",
+  "players": [
+    {
+      "draw_no": 1,
+      "registration_no": "G0023470",
+      "seed": "1",
+      "name": "畠中 聡",
+      "club": "関⻄学院庭球倶楽部",
+      "is_bye": false
+    },
+    {
+      "draw_no": 2,
+      "registration_no": null,
+      "seed": null,
+      "name": null,
+      "club": null,
+      "is_bye": true
+    },
+    {
+      "draw_no": 4,
+      "registration_no": "G0026208",
+      "seed": null,
+      "name": "関 雄輝",
+      "club": "COSANA",
+      "is_bye": false
+    },
+    {
+      "draw_no": 6,
+      "registration_no": null,
+      "seed": null,
+      "name": null,
+      "club": null,
+      "is_bye": true
+    },
+    {
+      "draw_no": 7,
+      "registration_no": null,
+      "seed": null,
+      "name": null,
+      "club": null,
+      "is_bye": true
+    },
+    {
+      "draw_no": 11,
+      "registration_no": null,
+      "seed": null,
+      "name": null,
+      "club": null,
+      "is_bye": true
+    },
+    {
+      "draw_no": 15,
+      "registration_no": null,
+      "seed": null,
+      "name": null,
+      "club": null,
+      "is_bye": true
+    }
+  ],
+  "winner": null
+}

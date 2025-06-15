@@ -1,0 +1,1696 @@
+{
+  "pdfFile": "result_1005226.pdf",
+  "category": "男子シングルス 35歳以上",
+  "players": [
+    {
+      "registrationNo": "G0023470",
+      "name": "1畠中 聡関⻄学院庭球倶楽部畠中",
+      "club": "聡",
+      "drawPosition": 1
+    },
+    {
+      "registrationNo": "G0026288",
+      "name": "3〜4村上 大喜PEACE村上",
+      "club": "大喜",
+      "drawPosition": 2
+    },
+    {
+      "registrationNo": "G0027025",
+      "name": "3〜4岩坂 賢吾日本郵政",
+      "club": "",
+      "drawPosition": 4
+    },
+    {
+      "registrationNo": "G0027109",
+      "name": "2⻄井 大貴エム・エス・テニスカレッジ",
+      "club": "",
+      "drawPosition": 5
+    },
+    {
+      "registrationNo": "G0022525",
+      "name": "1三木 康太郎くにじま三木",
+      "club": "康太郎",
+      "drawPosition": 6
+    },
+    {
+      "registrationNo": "G0027540",
+      "name": "5〜8八木 佑介今治市役所",
+      "club": "",
+      "drawPosition": 8
+    },
+    {
+      "registrationNo": "G0023569",
+      "name": "3〜4河村 充中之島キャピタル河村",
+      "club": "充",
+      "drawPosition": 9
+    },
+    {
+      "registrationNo": "G0022798",
+      "name": "5〜8辻本 万里ノアインドアステージ",
+      "club": "",
+      "drawPosition": 10
+    },
+    {
+      "registrationNo": "G0023122",
+      "name": "5〜8池田 裕志香里グリーンテニスクラブ池田",
+      "club": "裕志",
+      "drawPosition": 11
+    },
+    {
+      "registrationNo": "G0024813",
+      "name": "3〜4森戶 英俊クレールインドアテニススクール",
+      "club": "",
+      "drawPosition": 12
+    },
+    {
+      "registrationNo": "G0026144",
+      "name": "5〜8南埜 真範OUT",
+      "club": "BREAK南埜 真範",
+      "drawPosition": 13
+    },
+    {
+      "registrationNo": "G0022787",
+      "name": "2伊藤 俊宏Team",
+      "club": "AATP",
+      "drawPosition": 14
+    },
+    {
+      "registrationNo": "G0020991",
+      "name": "1大坪 勇人Jʼs",
+      "club": "club大坪 勇人",
+      "drawPosition": 15
+    },
+    {
+      "registrationNo": "G0026132",
+      "name": "5〜8来馬 剛サンランドロイヤルＴＣ",
+      "club": "",
+      "drawPosition": 17
+    },
+    {
+      "registrationNo": "G0027123",
+      "name": "3〜4児玉 友一郎サンランドロイヤルTC児玉",
+      "club": "友一郎",
+      "drawPosition": 18
+    },
+    {
+      "registrationNo": "G0027477",
+      "name": "5〜8上田 威クアドリフォリオ",
+      "club": "",
+      "drawPosition": 19
+    },
+    {
+      "registrationNo": "G0022382",
+      "name": "5〜8國友 将史泉大津ロイヤルTC國友",
+      "club": "将史",
+      "drawPosition": 20
+    },
+    {
+      "registrationNo": "G0020512",
+      "name": "3〜4入江 正和ルーセントテニスクラブ八尾",
+      "club": "",
+      "drawPosition": 21
+    },
+    {
+      "registrationNo": "G0018346",
+      "name": "5〜8江藤 宏文サンランドロイヤルＴＣ江藤",
+      "club": "宏文",
+      "drawPosition": 22
+    },
+    {
+      "registrationNo": "G0027146",
+      "name": "2井山 浩二ルーセントテニスクラブ豊中",
+      "club": "",
+      "drawPosition": 23
+    },
+    {
+      "registrationNo": "G0027151",
+      "name": "1",
+      "club": "",
+      "drawPosition": 24
+    },
+    {
+      "registrationNo": "G0024544",
+      "name": "9〜12",
+      "club": "",
+      "drawPosition": 25
+    },
+    {
+      "registrationNo": "G0027378",
+      "name": "5〜8",
+      "club": "",
+      "drawPosition": 26
+    },
+    {
+      "registrationNo": "G0023409",
+      "name": "3〜4",
+      "club": "",
+      "drawPosition": 27
+    },
+    {
+      "registrationNo": "G0016241",
+      "name": "9〜12",
+      "club": "",
+      "drawPosition": 28
+    },
+    {
+      "registrationNo": "G0025759",
+      "name": "5〜8",
+      "club": "",
+      "drawPosition": 29
+    },
+    {
+      "registrationNo": "G0017720",
+      "name": "5〜8",
+      "club": "",
+      "drawPosition": 30
+    },
+    {
+      "registrationNo": "G0022369",
+      "name": "9〜12",
+      "club": "",
+      "drawPosition": 31
+    },
+    {
+      "registrationNo": "G0025560",
+      "name": "3〜4",
+      "club": "",
+      "drawPosition": 32
+    },
+    {
+      "registrationNo": "G0016974",
+      "name": "5〜8",
+      "club": "",
+      "drawPosition": 33
+    },
+    {
+      "registrationNo": "G0027445",
+      "name": "9〜12",
+      "club": "",
+      "drawPosition": 34
+    },
+    {
+      "registrationNo": "G0017645",
+      "name": "2",
+      "club": "",
+      "drawPosition": 35
+    },
+    {
+      "registrationNo": "G0013839",
+      "name": "1",
+      "club": "",
+      "drawPosition": 36
+    },
+    {
+      "registrationNo": "G0013095",
+      "name": "9〜12",
+      "club": "",
+      "drawPosition": 37
+    },
+    {
+      "registrationNo": "G0020553",
+      "name": "5〜8",
+      "club": "",
+      "drawPosition": 38
+    },
+    {
+      "registrationNo": "G0016184",
+      "name": "3〜4",
+      "club": "",
+      "drawPosition": 39
+    },
+    {
+      "registrationNo": "G0009563",
+      "name": "9〜12",
+      "club": "",
+      "drawPosition": 40
+    },
+    {
+      "registrationNo": "G0022492",
+      "name": "5〜8",
+      "club": "",
+      "drawPosition": 41
+    },
+    {
+      "registrationNo": "G0022373",
+      "name": "5〜8",
+      "club": "",
+      "drawPosition": 42
+    },
+    {
+      "registrationNo": "G0001472",
+      "name": "9〜12",
+      "club": "",
+      "drawPosition": 43
+    },
+    {
+      "registrationNo": "G0014768",
+      "name": "3〜4",
+      "club": "",
+      "drawPosition": 44
+    },
+    {
+      "registrationNo": "G0027234",
+      "name": "5〜8",
+      "club": "",
+      "drawPosition": 45
+    },
+    {
+      "registrationNo": "G0023163",
+      "name": "9〜12",
+      "club": "",
+      "drawPosition": 46
+    },
+    {
+      "registrationNo": "G0012189",
+      "name": "2",
+      "club": "",
+      "drawPosition": 47
+    },
+    {
+      "registrationNo": "G0008912",
+      "name": "1",
+      "club": "",
+      "drawPosition": 48
+    },
+    {
+      "registrationNo": "G0022795",
+      "name": "9〜12",
+      "club": "",
+      "drawPosition": 49
+    },
+    {
+      "registrationNo": "G0027670",
+      "name": "5〜8",
+      "club": "",
+      "drawPosition": 50
+    },
+    {
+      "registrationNo": "G0016906",
+      "name": "3〜4",
+      "club": "",
+      "drawPosition": 51
+    },
+    {
+      "registrationNo": "G0001141",
+      "name": "9〜12",
+      "club": "",
+      "drawPosition": 52
+    },
+    {
+      "registrationNo": "G0027091",
+      "name": "5〜8",
+      "club": "",
+      "drawPosition": 53
+    },
+    {
+      "registrationNo": "G0024215",
+      "name": "5〜8",
+      "club": "",
+      "drawPosition": 54
+    },
+    {
+      "registrationNo": "G0022743",
+      "name": "9〜12",
+      "club": "",
+      "drawPosition": 55
+    },
+    {
+      "registrationNo": "G0014279",
+      "name": "3〜4",
+      "club": "",
+      "drawPosition": 56
+    },
+    {
+      "registrationNo": "G0000663",
+      "name": "5〜8",
+      "club": "",
+      "drawPosition": 57
+    },
+    {
+      "registrationNo": "G0022287",
+      "name": "9〜12",
+      "club": "",
+      "drawPosition": 58
+    },
+    {
+      "registrationNo": "G0018902",
+      "name": "2",
+      "club": "",
+      "drawPosition": 59
+    },
+    {
+      "registrationNo": "G0012286",
+      "name": "1",
+      "club": "",
+      "drawPosition": 60
+    },
+    {
+      "registrationNo": "G0001117",
+      "name": "9〜12",
+      "club": "",
+      "drawPosition": 61
+    },
+    {
+      "registrationNo": "G0004724",
+      "name": "5〜8",
+      "club": "",
+      "drawPosition": 62
+    },
+    {
+      "registrationNo": "G0016737",
+      "name": "3〜4",
+      "club": "",
+      "drawPosition": 63
+    },
+    {
+      "registrationNo": "G0025333",
+      "name": "9〜12",
+      "club": "",
+      "drawPosition": 64
+    },
+    {
+      "registrationNo": "G0023976",
+      "name": "5〜8",
+      "club": "",
+      "drawPosition": 65
+    },
+    {
+      "registrationNo": "G0002982",
+      "name": "5〜8",
+      "club": "",
+      "drawPosition": 66
+    },
+    {
+      "registrationNo": "G0027197",
+      "name": "9〜12",
+      "club": "",
+      "drawPosition": 67
+    },
+    {
+      "registrationNo": "G0025788",
+      "name": "3〜4",
+      "club": "",
+      "drawPosition": 68
+    },
+    {
+      "registrationNo": "G0020458",
+      "name": "5〜8",
+      "club": "",
+      "drawPosition": 69
+    },
+    {
+      "registrationNo": "G0024750",
+      "name": "9〜12",
+      "club": "",
+      "drawPosition": 70
+    },
+    {
+      "registrationNo": "G0019063",
+      "name": "2",
+      "club": "",
+      "drawPosition": 71
+    },
+    {
+      "registrationNo": "G0004725",
+      "name": "1",
+      "club": "",
+      "drawPosition": 72
+    },
+    {
+      "registrationNo": "G0022285",
+      "name": "9〜12",
+      "club": "",
+      "drawPosition": 73
+    },
+    {
+      "registrationNo": "G0001482",
+      "name": "5〜8",
+      "club": "",
+      "drawPosition": 74
+    },
+    {
+      "registrationNo": "G0018264",
+      "name": "3〜4",
+      "club": "",
+      "drawPosition": 75
+    },
+    {
+      "registrationNo": "G0021072",
+      "name": "9〜12",
+      "club": "",
+      "drawPosition": 76
+    },
+    {
+      "registrationNo": "G0023230",
+      "name": "5〜8",
+      "club": "",
+      "drawPosition": 77
+    },
+    {
+      "registrationNo": "G0014545",
+      "name": "5〜8",
+      "club": "",
+      "drawPosition": 78
+    },
+    {
+      "registrationNo": "G0022340",
+      "name": "9〜12",
+      "club": "",
+      "drawPosition": 79
+    },
+    {
+      "registrationNo": "G0001394",
+      "name": "3〜4",
+      "club": "",
+      "drawPosition": 80
+    },
+    {
+      "registrationNo": "G0024515",
+      "name": "5〜8",
+      "club": "",
+      "drawPosition": 81
+    },
+    {
+      "registrationNo": "G0020630",
+      "name": "9〜12",
+      "club": "",
+      "drawPosition": 82
+    },
+    {
+      "registrationNo": "G0004131",
+      "name": "2",
+      "club": "",
+      "drawPosition": 83
+    },
+    {
+      "registrationNo": "G0001215",
+      "name": "1松本 千秋京都市テニス協会(個人会員）松本",
+      "club": "千秋",
+      "drawPosition": 84
+    },
+    {
+      "registrationNo": "G0015759",
+      "name": "5〜8辻 昌延奈良国際テニスクラブ",
+      "club": "",
+      "drawPosition": 86
+    },
+    {
+      "registrationNo": "G0006714",
+      "name": "3〜4車谷 博己甲子園テニスクラブ車谷",
+      "club": "博己",
+      "drawPosition": 87
+    },
+    {
+      "registrationNo": "G0012715",
+      "name": "5〜8北尾 善明イーストテニスクラブ",
+      "club": "",
+      "drawPosition": 88
+    },
+    {
+      "registrationNo": "G0018036",
+      "name": "5〜8市川 正美岐阜ローンテニスクラブ市川",
+      "club": "正美",
+      "drawPosition": 89
+    },
+    {
+      "registrationNo": "G0002054",
+      "name": "3〜4竹内 美史南愛知テニスドーム",
+      "club": "",
+      "drawPosition": 90
+    },
+    {
+      "registrationNo": "G0019010",
+      "name": "5〜8上村 光廣マリンテニスパーク北村山口",
+      "club": "博造",
+      "drawPosition": 91
+    },
+    {
+      "registrationNo": "G0001517",
+      "name": "2阿部 欽亮テニスクラブ",
+      "club": "コ・ス・パ芦屋シ−サイド",
+      "drawPosition": 92
+    },
+    {
+      "registrationNo": "G0001486",
+      "name": "1松井 成男庭仁貴知ＴＣ松井",
+      "club": "成男",
+      "drawPosition": 93
+    },
+    {
+      "registrationNo": "G0015535",
+      "name": "5〜8⻑澤 洋三宝塚パブリックLTC",
+      "club": "",
+      "drawPosition": 95
+    },
+    {
+      "registrationNo": "G0007014",
+      "name": "3〜4太田 不二雄セントマリアホスピタル太田",
+      "club": "不二雄",
+      "drawPosition": 96
+    },
+    {
+      "registrationNo": "G0012257",
+      "name": "5〜8寺川 浩史野洲テニスクラブ",
+      "club": "",
+      "drawPosition": 97
+    },
+    {
+      "registrationNo": "G0018104",
+      "name": "5〜8山口 建暉熊野ローンテニスクラブ山口",
+      "club": "建暉",
+      "drawPosition": 98
+    },
+    {
+      "registrationNo": "G0014182",
+      "name": "3〜4加山 仁池田テニスクラブ",
+      "club": "",
+      "drawPosition": 99
+    },
+    {
+      "registrationNo": "G0023134",
+      "name": "5〜8指田 紀雄立川グリーンテニスクラブ指田",
+      "club": "紀雄",
+      "drawPosition": 100
+    },
+    {
+      "registrationNo": "G0008777",
+      "name": "2大﨑 一雄神戶天王山倶楽部",
+      "club": "",
+      "drawPosition": 101
+    },
+    {
+      "registrationNo": "G0027414",
+      "name": "1松島 巖名古屋ローンテニスクラブ松島",
+      "club": "巖",
+      "drawPosition": 102
+    },
+    {
+      "registrationNo": "G0017296",
+      "name": "2里深 信行京都フレンドテニスクラブ",
+      "club": "",
+      "drawPosition": 104
+    },
+    {
+      "registrationNo": "L0021007",
+      "name": "1竹本 歌織Harry's竹本",
+      "club": "歌織",
+      "drawPosition": 105
+    },
+    {
+      "registrationNo": "L0021291",
+      "name": "2森田 能子四ノ宮テニスクラブ",
+      "club": "",
+      "drawPosition": 107
+    },
+    {
+      "registrationNo": "L0019294",
+      "name": "1山田 朋子PINTO.TC山田",
+      "club": "朋子",
+      "drawPosition": 108
+    },
+    {
+      "registrationNo": "L0020062",
+      "name": "3〜4賀川 英子BAKTEN賀川",
+      "club": "英子",
+      "drawPosition": 109
+    },
+    {
+      "registrationNo": "L0021284",
+      "name": "3〜4新 陽子ヴァルブランシュ",
+      "club": "",
+      "drawPosition": 111
+    },
+    {
+      "registrationNo": "L0012716",
+      "name": "2藤村 実加ニックインドアテニスカレッジ",
+      "club": "",
+      "drawPosition": 112
+    },
+    {
+      "registrationNo": "L0012640",
+      "name": "1江馬 愛子京都東山テニスクラブ江馬",
+      "club": "愛子",
+      "drawPosition": 113
+    },
+    {
+      "registrationNo": "L0019638",
+      "name": "3〜4奥 富美子目黑区テニス協会岩本",
+      "club": "淳子",
+      "drawPosition": 114
+    },
+    {
+      "registrationNo": "L0020882",
+      "name": "3〜4小松 亜矢子足柄ﾛｰﾝﾃﾆｽｸﾗﾌﾞ",
+      "club": "",
+      "drawPosition": 115
+    },
+    {
+      "registrationNo": "L0011957",
+      "name": "2三嶋 亜季COSANA",
+      "club": "",
+      "drawPosition": 116
+    },
+    {
+      "registrationNo": "L0011825",
+      "name": "1佐藤 陽子ファミリーテニスクラブ佐藤",
+      "club": "陽子",
+      "drawPosition": 117
+    },
+    {
+      "registrationNo": "L0020982",
+      "name": "3〜4久田 順子神戶天王山倶楽部久田",
+      "club": "順子",
+      "drawPosition": 118
+    },
+    {
+      "registrationNo": "L0011088",
+      "name": "3〜4笠原 昭子O.P.A.tennis",
+      "club": "",
+      "drawPosition": 119
+    },
+    {
+      "registrationNo": "L0009561",
+      "name": "2牧野 恵子サンランドロイヤルＴＣ",
+      "club": "",
+      "drawPosition": 120
+    },
+    {
+      "registrationNo": "L0006389",
+      "name": "1河辺 美枝巧庭球塾河辺",
+      "club": "美枝",
+      "drawPosition": 121
+    },
+    {
+      "registrationNo": "L0009454",
+      "name": "5〜8松澤 登喜子巧庭球塾",
+      "club": "",
+      "drawPosition": 123
+    },
+    {
+      "registrationNo": "L0012116",
+      "name": "3〜4斎藤 優子大正セントラルテニスクラブ目白斎藤",
+      "club": "優子",
+      "drawPosition": 124
+    },
+    {
+      "registrationNo": "L0006242",
+      "name": "5〜8鈴木 ひさリベラ仙台",
+      "club": "",
+      "drawPosition": 125
+    },
+    {
+      "registrationNo": "L0009373",
+      "name": "5〜8井藤 京子Aʼs",
+      "club": "FACTORY井藤 京子",
+      "drawPosition": 126
+    },
+    {
+      "registrationNo": "L0011658",
+      "name": "3〜4岩本 由美子⻑住テニスクラブ",
+      "club": "",
+      "drawPosition": 127
+    },
+    {
+      "registrationNo": "L0009844",
+      "name": "5〜8音田 美登里巧庭球塾.音田",
+      "club": "美登里",
+      "drawPosition": 128
+    },
+    {
+      "registrationNo": "L0008015",
+      "name": "2鈴木 千登世リベラ仙台",
+      "club": "",
+      "drawPosition": 129
+    },
+    {
+      "registrationNo": "L0012595",
+      "name": "1",
+      "club": "",
+      "drawPosition": 130
+    },
+    {
+      "registrationNo": "L0019285",
+      "name": "9〜12",
+      "club": "",
+      "drawPosition": 131
+    },
+    {
+      "registrationNo": "L0009802",
+      "name": "5〜8",
+      "club": "",
+      "drawPosition": 132
+    },
+    {
+      "registrationNo": "L0008182",
+      "name": "3〜4",
+      "club": "",
+      "drawPosition": 133
+    },
+    {
+      "registrationNo": "L0005105",
+      "name": "9〜12",
+      "club": "",
+      "drawPosition": 134
+    },
+    {
+      "registrationNo": "L0004239",
+      "name": "5〜8",
+      "club": "",
+      "drawPosition": 135
+    },
+    {
+      "registrationNo": "L0003653",
+      "name": "5〜8",
+      "club": "",
+      "drawPosition": 136
+    },
+    {
+      "registrationNo": "L0021076",
+      "name": "9〜12",
+      "club": "",
+      "drawPosition": 137
+    },
+    {
+      "registrationNo": "L0008059",
+      "name": "3〜4",
+      "club": "",
+      "drawPosition": 138
+    },
+    {
+      "registrationNo": "L0010966",
+      "name": "5〜8",
+      "club": "",
+      "drawPosition": 139
+    },
+    {
+      "registrationNo": "L0000387",
+      "name": "9〜12",
+      "club": "",
+      "drawPosition": 140
+    },
+    {
+      "registrationNo": "L0010661",
+      "name": "2",
+      "club": "",
+      "drawPosition": 141
+    },
+    {
+      "registrationNo": "L0000726",
+      "name": "1土屋 章子ヴァルブランシュテニスクラブ土屋",
+      "club": "章子",
+      "drawPosition": 142
+    },
+    {
+      "registrationNo": "L0005917",
+      "name": "3〜4赤瀬 みや子ファミリークラブ赤瀬",
+      "club": "みや子",
+      "drawPosition": 143
+    },
+    {
+      "registrationNo": "L0005149",
+      "name": "3〜4若槻 よし子テニスガーデン",
+      "club": "レニックス",
+      "drawPosition": 145
+    },
+    {
+      "registrationNo": "L0002652",
+      "name": "2中村 規子多田ハイグリーンTC",
+      "club": "",
+      "drawPosition": 146
+    },
+    {
+      "registrationNo": "G0022525",
+      "name": "1三木 康太郎くにじま",
+      "club": "",
+      "drawPosition": 147
+    },
+    {
+      "registrationNo": "G0023569",
+      "name": "2河村 充中之島キャピタル",
+      "club": "",
+      "drawPosition": 148
+    },
+    {
+      "registrationNo": "G0027146",
+      "name": "1井山 浩二ルーセントテニスクラブ豊中",
+      "club": "",
+      "drawPosition": 149
+    },
+    {
+      "registrationNo": "G0020991",
+      "name": "2大坪 勇人Jʼs",
+      "club": "club",
+      "drawPosition": 150
+    },
+    {
+      "registrationNo": "G0017645",
+      "name": "1川端 幸治サンランドロイヤルTC",
+      "club": "",
+      "drawPosition": 151
+    },
+    {
+      "registrationNo": "G0019415",
+      "name": "2膳棚 康晴O.P.Atennis",
+      "club": "",
+      "drawPosition": 152
+    },
+    {
+      "registrationNo": "G0001069",
+      "name": "1衛藤 ⻫AtoZ",
+      "club": "",
+      "drawPosition": 153
+    },
+    {
+      "registrationNo": "G0012189",
+      "name": "2坂本 純一京都庭球友会",
+      "club": "",
+      "drawPosition": 154
+    },
+    {
+      "registrationNo": "G0018902",
+      "name": "1山本 健司池田市テニス協会",
+      "club": "",
+      "drawPosition": 155
+    },
+    {
+      "registrationNo": "G0021639",
+      "name": "3〜4松崎 久也team",
+      "club": "Kazu",
+      "drawPosition": 157
+    },
+    {
+      "registrationNo": "G0025092",
+      "name": "3〜4米澤 正喜三郷ウッディーズ",
+      "club": "",
+      "drawPosition": 158
+    },
+    {
+      "registrationNo": "G0008912",
+      "name": "2原薗 裕之アイ・テニスクラブ",
+      "club": "",
+      "drawPosition": 159
+    },
+    {
+      "registrationNo": "G0014605",
+      "name": "1高柳 剛宏⻲の甲山テニスクラブ",
+      "club": "",
+      "drawPosition": 160
+    },
+    {
+      "registrationNo": "G0002023",
+      "name": "2安部 芳政大阪産業大学",
+      "club": "",
+      "drawPosition": 161
+    },
+    {
+      "registrationNo": "G0001394",
+      "name": "1持田 明広法曹テニスクラブ",
+      "club": "",
+      "drawPosition": 162
+    },
+    {
+      "registrationNo": "G0019199",
+      "name": "3〜4堀内 邦康サンランドロイヤルテニスクラブ",
+      "club": "",
+      "drawPosition": 164
+    },
+    {
+      "registrationNo": "G0017585",
+      "name": "3〜4福澤 健次サンランドロイヤルＴＣ",
+      "club": "",
+      "drawPosition": 167
+    },
+    {
+      "registrationNo": "G0021072",
+      "name": "2田中 正彦廿日市ローンテニスクラブ",
+      "club": "",
+      "drawPosition": 169
+    },
+    {
+      "registrationNo": "G0001517",
+      "name": "1阿部 欽亮テニスクラブ",
+      "club": "コ・ス・パ芦屋シ−サイド",
+      "drawPosition": 170
+    },
+    {
+      "registrationNo": "G0001852",
+      "name": "2小林 仁宝塚パブリックＬＴＣ",
+      "club": "",
+      "drawPosition": 171
+    },
+    {
+      "registrationNo": "G0002019",
+      "name": "1森田 常樹モリタテニス企画",
+      "club": "",
+      "drawPosition": 172
+    },
+    {
+      "registrationNo": "L0011957",
+      "name": "1三嶋 亜季COSANA6ー36ー0",
+      "club": "",
+      "drawPosition": 173
+    },
+    {
+      "registrationNo": "L0009561",
+      "name": "1牧野 恵子サンランドロイヤルＴＣWon7ー5",
+      "club": "",
+      "drawPosition": 174
+    },
+    {
+      "registrationNo": "L0010489",
+      "name": "1石田 京子京都市テニス協会",
+      "club": "",
+      "drawPosition": 175
+    },
+    {
+      "registrationNo": "L0008015",
+      "name": "2鈴木 千登世リベラ仙台",
+      "club": "",
+      "drawPosition": 177
+    },
+    {
+      "registrationNo": "L0019731",
+      "name": "1太田 直子軽井沢会",
+      "club": "",
+      "drawPosition": 178
+    },
+    {
+      "registrationNo": "L0008059",
+      "name": "3〜4山川 知枝芦屋国際ローンテニスクラブ",
+      "club": "",
+      "drawPosition": 180
+    },
+    {
+      "registrationNo": "L0019959",
+      "name": "3〜4後藤 君代ユニバー神戶テニス倶楽部",
+      "club": "",
+      "drawPosition": 184
+    },
+    {
+      "registrationNo": "L0021039",
+      "name": "2山口 俊子テニスラウンジ奈良",
+      "club": "",
+      "drawPosition": 186
+    },
+    {
+      "registrationNo": "L0012244",
+      "name": "1日野原 暁美ダンロップテニス江坂",
+      "club": "",
+      "drawPosition": 187
+    },
+    {
+      "registrationNo": "L0002666",
+      "name": "2日谷 裕子多田ハイグリーンT.C",
+      "club": "",
+      "drawPosition": 188
+    }
+  ],
+  "matches": [
+    {
+      "round": "1R",
+      "drawPosition1": 1,
+      "drawPosition2": 2,
+      "score": "61 61",
+      "winner": null,
+      "walkover": false
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 4,
+      "drawPosition2": 5,
+      "score": "64 64",
+      "winner": null,
+      "walkover": false
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 9,
+      "drawPosition2": 8,
+      "score": "W.O.",
+      "winner": null,
+      "walkover": true
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 11,
+      "drawPosition2": 10,
+      "score": "61 60",
+      "winner": null,
+      "walkover": false
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 11,
+      "drawPosition2": 12,
+      "score": "62 62",
+      "winner": null,
+      "walkover": false
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 13,
+      "drawPosition2": 12,
+      "score": "61 62",
+      "winner": null,
+      "walkover": false
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 13,
+      "drawPosition2": 14,
+      "score": "W.O.",
+      "winner": null,
+      "walkover": true
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 17,
+      "drawPosition2": 18,
+      "score": "62 64",
+      "winner": null,
+      "walkover": false
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 18,
+      "drawPosition2": 19,
+      "score": "63 75",
+      "winner": null,
+      "walkover": false
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 19,
+      "drawPosition2": 20,
+      "score": "16 63 61",
+      "winner": null,
+      "walkover": false
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 20,
+      "drawPosition2": 21,
+      "score": "62 61",
+      "winner": null,
+      "walkover": false
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 22,
+      "drawPosition2": 21,
+      "score": "64 64",
+      "winner": null,
+      "walkover": false
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 27,
+      "drawPosition2": 26,
+      "score": "W.O.",
+      "winner": null,
+      "walkover": true
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 30,
+      "drawPosition2": 29,
+      "score": "57 75 75",
+      "winner": null,
+      "walkover": false
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 33,
+      "drawPosition2": 32,
+      "score": "75 61",
+      "winner": null,
+      "walkover": false
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 39,
+      "drawPosition2": 38,
+      "score": "62 61",
+      "winner": null,
+      "walkover": false
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 42,
+      "drawPosition2": 41,
+      "score": "64 64",
+      "winner": null,
+      "walkover": false
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 45,
+      "drawPosition2": 44,
+      "score": "61 60",
+      "winner": null,
+      "walkover": false
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 51,
+      "drawPosition2": 50,
+      "score": "62 60",
+      "winner": null,
+      "walkover": false
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 53,
+      "drawPosition2": 54,
+      "score": "63 61",
+      "winner": null,
+      "walkover": false
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 157,
+      "drawPosition2": 58,
+      "score": "60 62",
+      "winner": null,
+      "walkover": false
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 66,
+      "drawPosition2": 65,
+      "score": "26 62 76(2)",
+      "winner": null,
+      "walkover": false
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 69,
+      "drawPosition2": 68,
+      "score": "60 62",
+      "winner": null,
+      "walkover": false
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 74,
+      "drawPosition2": 75,
+      "score": "W.O.",
+      "winner": null,
+      "walkover": true
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 167,
+      "drawPosition2": 76,
+      "score": "61 76(1)",
+      "winner": null,
+      "walkover": false
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 77,
+      "drawPosition2": 78,
+      "score": "60 64",
+      "winner": null,
+      "walkover": false
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 80,
+      "drawPosition2": 81,
+      "score": "75 60",
+      "winner": null,
+      "walkover": false
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 82,
+      "drawPosition2": 164,
+      "score": "63 63",
+      "winner": null,
+      "walkover": false
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 83,
+      "drawPosition2": 84,
+      "score": "W.O.",
+      "winner": null,
+      "walkover": true
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 86,
+      "drawPosition2": 87,
+      "score": "62 46 60",
+      "winner": null,
+      "walkover": false
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 88,
+      "drawPosition2": 89,
+      "score": "W.O.",
+      "winner": null,
+      "walkover": true
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 89,
+      "drawPosition2": 90,
+      "score": "63 52  RET",
+      "winner": null,
+      "walkover": false
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 90,
+      "drawPosition2": 91,
+      "score": "60 60",
+      "winner": null,
+      "walkover": false
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 91,
+      "drawPosition2": 92,
+      "score": "26 62 61",
+      "winner": null,
+      "walkover": false
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 96,
+      "drawPosition2": 95,
+      "score": "64 63",
+      "winner": null,
+      "walkover": false
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 96,
+      "drawPosition2": 97,
+      "score": "26 60 10-6",
+      "winner": null,
+      "walkover": false
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 98,
+      "drawPosition2": 97,
+      "score": "75 62",
+      "winner": null,
+      "walkover": false
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 100,
+      "drawPosition2": 99,
+      "score": "62 64",
+      "winner": null,
+      "walkover": false
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 108,
+      "drawPosition2": 109,
+      "score": "64 46 61",
+      "winner": null,
+      "walkover": false
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 111,
+      "drawPosition2": 112,
+      "score": "60 60",
+      "winner": null,
+      "walkover": false
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 113,
+      "drawPosition2": 112,
+      "score": "61 60",
+      "winner": null,
+      "walkover": false
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 113,
+      "drawPosition2": 114,
+      "score": "60 62",
+      "winner": null,
+      "walkover": false
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 115,
+      "drawPosition2": 116,
+      "score": "61 26 63",
+      "winner": null,
+      "walkover": false
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 116,
+      "drawPosition2": 117,
+      "score": "61 61",
+      "winner": null,
+      "walkover": false
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 117,
+      "drawPosition2": 118,
+      "score": "61 62",
+      "winner": null,
+      "walkover": false
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 119,
+      "drawPosition2": 120,
+      "score": "62 61",
+      "winner": null,
+      "walkover": false
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 123,
+      "drawPosition2": 124,
+      "score": "64 76(5)",
+      "winner": null,
+      "walkover": false
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 124,
+      "drawPosition2": 125,
+      "score": "60 62",
+      "winner": null,
+      "walkover": false
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 125,
+      "drawPosition2": 126,
+      "score": "26 76(5) 75",
+      "winner": null,
+      "walkover": false
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 128,
+      "drawPosition2": 127,
+      "score": "46 64 60",
+      "winner": null,
+      "walkover": false
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 136,
+      "drawPosition2": 135,
+      "score": "63 76(2)",
+      "winner": null,
+      "walkover": false
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 139,
+      "drawPosition2": 138,
+      "score": "64 61",
+      "winner": null,
+      "walkover": false
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 142,
+      "drawPosition2": 143,
+      "score": "60 60",
+      "winner": null,
+      "walkover": false
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 143,
+      "drawPosition2": 145,
+      "score": "W.O.",
+      "winner": null,
+      "walkover": true
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 145,
+      "drawPosition2": 146,
+      "score": "W.O.",
+      "winner": null,
+      "walkover": true
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 11,
+      "drawPosition2": 6,
+      "score": "62 60",
+      "winner": null,
+      "walkover": false
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 14,
+      "drawPosition2": 9,
+      "score": "61 64",
+      "winner": null,
+      "walkover": false
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 23,
+      "drawPosition2": 19,
+      "score": "64 64",
+      "winner": null,
+      "walkover": false
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 20,
+      "drawPosition2": 15,
+      "score": "W.O.",
+      "winner": null,
+      "walkover": true
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 15,
+      "drawPosition2": 35,
+      "score": "62 60",
+      "winner": null,
+      "walkover": false
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 24,
+      "drawPosition2": 35,
+      "score": "62 36 10-6",
+      "winner": null,
+      "walkover": false
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 152,
+      "drawPosition2": 32,
+      "score": "61 61",
+      "winner": null,
+      "walkover": false
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 47,
+      "drawPosition2": 46,
+      "score": "64 26 10-3",
+      "winner": null,
+      "walkover": false
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 49,
+      "drawPosition2": 52,
+      "score": "64 36 10-1",
+      "winner": null,
+      "walkover": false
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 49,
+      "drawPosition2": 157,
+      "score": "64 62",
+      "winner": null,
+      "walkover": false
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 158,
+      "drawPosition2": 48,
+      "score": "62 63",
+      "winner": null,
+      "walkover": false
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 48,
+      "drawPosition2": 160,
+      "score": "61 63",
+      "winner": null,
+      "walkover": false
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 83,
+      "drawPosition2": 79,
+      "score": "26 60 10-8",
+      "winner": null,
+      "walkover": false
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 79,
+      "drawPosition2": 164,
+      "score": "63 62",
+      "winner": null,
+      "walkover": false
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 164,
+      "drawPosition2": 73,
+      "score": "61 62",
+      "winner": null,
+      "walkover": false
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 73,
+      "drawPosition2": 81,
+      "score": "60 75",
+      "winner": null,
+      "walkover": false
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 167,
+      "drawPosition2": 81,
+      "score": "64 63",
+      "winner": null,
+      "walkover": false
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 92,
+      "drawPosition2": 90,
+      "score": "63 30  RET",
+      "winner": null,
+      "walkover": false
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 90,
+      "drawPosition2": 88,
+      "score": "61 64",
+      "winner": null,
+      "walkover": false
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 88,
+      "drawPosition2": 171,
+      "score": "61 63",
+      "winner": null,
+      "walkover": false
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 120,
+      "drawPosition2": 118,
+      "score": "L0019126山本 智子丹波インドアテニスカレッジW.OW.O",
+      "winner": null,
+      "walkover": true
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 175,
+      "drawPosition2": 126,
+      "score": "61 26 10-3",
+      "winner": null,
+      "walkover": false
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 126,
+      "drawPosition2": 124,
+      "score": "63 61",
+      "winner": null,
+      "walkover": false
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 124,
+      "drawPosition2": 129,
+      "score": "63 63",
+      "winner": null,
+      "walkover": false
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 136,
+      "drawPosition2": 138,
+      "score": "62 62",
+      "winner": null,
+      "walkover": false
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 133,
+      "drawPosition2": 184,
+      "score": "64 61",
+      "winner": null,
+      "walkover": false
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 139,
+      "drawPosition2": 133,
+      "score": "63 64",
+      "winner": null,
+      "walkover": false
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 137,
+      "drawPosition2": 139,
+      "score": "64 76(8)",
+      "winner": null,
+      "walkover": false
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 146,
+      "drawPosition2": 187,
+      "score": "64 75",
+      "winner": null,
+      "walkover": false
+    },
+    {
+      "round": "1R",
+      "drawPosition1": 188,
+      "drawPosition2": 142,
+      "score": "W.O.",
+      "winner": null,
+      "walkover": true
+    }
+  ],
+  "stats": {
+    "totalPlayers": 167,
+    "totalMatches": 85,
+    "seededPlayers": 0,
+    "walkovers": 11
+  }
+}
